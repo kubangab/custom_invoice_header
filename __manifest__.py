@@ -1,6 +1,6 @@
 {
     'name': 'Custom Invoice Header',
-    'version': '16.0.1.0.0',
+    'version': '16.0.1.0.1',
     'category': 'Accounting',
     'summary': 'Customize invoice header to show invoice number from page 2 onwards',
     'description': """
