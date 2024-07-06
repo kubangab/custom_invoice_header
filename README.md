@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Custom Invoice Header module enhances Odoo's invoice reporting functionality by adding the invoice number to the header of PDF reports from the second page onwards. This module is designed for Odoo 16 and integrates seamlessly with the existing invoice layout.
+The Custom Invoice Header module enhances Odoo's invoice reporting functionality by adding the invoice number to the header of PDF reports from the second page onwards. This module is designed for Odoo 16 and integrates seamlessly with the existing invoice layout. This code use code from OCA Reporting-Engine -> report_qweb_element_page_visibility
 
 ## Features
 
@@ -44,6 +44,19 @@ This module is developed and tested on Odoo 16. It may require modifications to 
 
 For bug reports or feature requests, please use the issue tracker on the project's GitHub repository.
 
+## Contributors OCA JavaScript code
+
+* Nicola Malcontenti <nicola.malcontenti@agilebg.com>
+* Lorenzo Battistini <lorenzo.battistini@agilebg.com>
+* Alessio Gerace <alessio.gerace@agilebg.com>
+* Alex Comba <alex.comba@agilebg.com>
+* Saran Limpajitkutaporn <saranl@ecosoft.co.th>
+* Pimolnat Suntian <pimolnats@ecosoft.co.th>
+* Tharathip Chaweewongphan <tharathipc@ecosoft.co.th>
+* `Trobz <https://trobz.com>`_:
+    * Hai Lang <hailn@trobz.com>
+* Ángel Tornero Hernández <angel.tornero@braintec.com>
+
 ## Contributing
 
 Contributions to improve the module are welcome. Please follow these steps:
@@ -57,9 +70,9 @@ Contributions to improve the module are welcome. Please follow these steps:
 
 This module is released under the LGPL-3 license. See the LICENSE file for more details.
 
-## Author
+## Authors
 
-[Your Name or Company Name]
+[Lasse Larsson, Kubang AB, lasse.larsson@kubang.eu]
 
 ---
 
