@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="minimal_layout_custom" inherit_id="web.minimal_layout">
+        <xpath expr="//script[last()]" position="after">
+            <script>
+                function subst() {
+                    var vars = {};
+                    var x = document.location.search.substring(1).split('&amp;');
+                    for (var i in x) {
+                        var z = x[i].split('=', 2);
+                        vars[z[0]] = unescape(z[1]);
+                    }
+                    var x = ['sitepage', 'sitepages', 'section', 'subsection', 'subsubsection'];
+                    var z = {'sitepage': 'page', 'sitepages': 'topage'};
+                    for (var i in x) {
+                        var y = document.getElementsByClassName(z[x[i]] || x[i])
+                        for (var j=0; j&lt;y.length; ++j)
+                            y[j].textContent = vars[x[i]];
+                    }
+
+                    var operations = {
+                        'not-first-page': function (elt) {
+                            elt.style.visibility = (vars.sitepage == 1) ? "hidden" : "visible";
+                        },
+                        'not-last-page': function (elt) {
+                            elt.style.visibility = (vars.sitepage == vars.sitepages) ? "hidden" : "visible";
+                        },
+                        'first-page': function (elt) {
+                            elt.style.visibility = (vars.sitepage == 1) ? "visible" : "hidden";
+                        },
+                        'last-page': function (elt) {
+                            elt.style.visibility = (vars.sitepage == vars.sitepages) ? "visible" : "hidden";
+                        },
+                    };
+                    for (var klass in operations) {
+                        var y = document.getElementsByClassName(klass);
+                        for (var j=0; j&lt;y.length; ++j)
+                            operations[klass](y[j]);
+                    }
+                }
+            </script>
+        </xpath>
+    </template>
+
+    <template id="external_layout_standard_custom" inherit_id="web.external_layout_standard">
+        <xpath expr="//div[contains(@t-attf-class, 'header')]" position="replace">
+            <t t-if="report_type == 'pdf'">
+                <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                    <div class="row">
+                        <div class="col-3 mb4">
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;" alt="Logo"/>
+                        </div>
+                        <div class="col-9 text-end" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+                    </div>
+                    <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                        <div class="col-12">
+                            <div style="border-bottom: 1px solid black;"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6" name="company_address">
+                            <ul class="list-unstyled">
+                                <li t-if="company.is_company_details_empty"><t t-esc="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/></li>
+                                <li t-else=""><t t-esc="company.company_details"/></li>
+                                <li t-if="forced_vat">
+                                    <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                                    <span t-esc="forced_vat"/>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-6 text-end">
+                            <span class="not-first-page">
+                                <span>Invoice Number: </span>
+                                <span t-field="o.name"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </t>
+            <t t-else="">
+                <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                    <div class="row">
+                        <div class="col-3 mb4">
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;" alt="Logo"/>
+                        </div>
+                        <div class="col-9 text-end" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+                    </div>
+                    <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                        <div class="col-12">
+                            <div style="border-bottom: 1px solid black;"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6" name="company_address">
+                            <ul class="list-unstyled">
+                                <li t-if="company.is_company_details_empty"><t t-esc="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/></li>
+                                <li t-else=""><t t-esc="company.company_details"/></li>
+                                <li t-if="forced_vat">
+                                    <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                                    <span t-esc="forced_vat"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>
