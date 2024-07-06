@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <template id="invoice_number_label">
+        <span>Invoice Number:</span>
+    </template>
+
     <template id="minimal_layout_custom" inherit_id="web.minimal_layout">
         <xpath expr="//script[last()]" position="after">
             <script>
@@ -70,7 +74,7 @@
                         </div>
                         <div class="col-6 text-end">
                             <span class="not-first-page">
-                                <span>Invoice Number: </span>
+                                <t t-call="custom_invoice_header.invoice_number_label"/>
                                 <span t-field="o.name"/>
                             </span>
                         </div>
