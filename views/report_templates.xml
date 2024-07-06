@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- Keep your existing invoice_number_label template -->
     <template id="invoice_number_label">
         <span>Invoice Number:</span>
     </template>
 
+    <!-- Keep your existing minimal_layout_custom template with the JavaScript -->
     <template id="minimal_layout_custom" inherit_id="web.minimal_layout">
         <xpath expr="//script[last()]" position="after">
             <script>
@@ -46,68 +48,44 @@
         </xpath>
     </template>
 
+    <!-- Modify your existing external_layout_standard_custom template -->
     <template id="external_layout_standard_custom" inherit_id="web.external_layout_standard">
         <xpath expr="//div[contains(@t-attf-class, 'header')]" position="replace">
-            <t t-if="report_type == 'pdf'">
-                <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
-                    <div class="row">
-                        <div class="col-3 mb4">
-                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;" alt="Logo"/>
-                        </div>
-                        <div class="col-9 text-end" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                <div class="row">
+                    <div class="col-3 mb4">
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;" alt="Logo"/>
                     </div>
-                    <div t-if="company.logo or company.report_header" class="row zero_min_height">
-                        <div class="col-12">
-                            <div style="border-bottom: 1px solid black;"/>
-                        </div>
+                    <div class="col-9 text-end" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+                </div>
+                <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                    <div class="col-12">
+                        <div style="border-bottom: 1px solid black;"/>
                     </div>
-                    <div class="row">
-                        <div class="col-6" name="company_address">
-                            <ul class="list-unstyled">
-                                <li t-if="company.is_company_details_empty"><t t-esc="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/></li>
-                                <li t-else=""><t t-esc="company.company_details"/></li>
-                                <li t-if="forced_vat">
-                                    <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
-                                    <span t-esc="forced_vat"/>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-6 text-end">
-                            <span class="not-first-page">
+                </div>
+                <div class="row">
+                    <div class="col-6" name="company_address">
+                        <ul class="list-unstyled">
+                            <li t-if="company.is_company_details_empty"><t t-esc="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/></li>
+                            <li t-else=""><t t-esc="company.company_details"/></li>
+                            <li t-if="forced_vat">
+                                <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                                <span t-esc="forced_vat"/>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6 text-end">
+                        <!-- Add this new div for the invoice number -->
+                        <div t-if="o and o._name == 'account.move' and o.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')" 
+                             class="invoice-number-container not-first-page">
+                            <strong>
                                 <t t-call="custom_invoice_header.invoice_number_label"/>
                                 <span t-field="o.name"/>
-                            </span>
+                            </strong>
                         </div>
                     </div>
                 </div>
-            </t>
-            <t t-else="">
-                <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
-                    <div class="row">
-                        <div class="col-3 mb4">
-                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;" alt="Logo"/>
-                        </div>
-                        <div class="col-9 text-end" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
-                    </div>
-                    <div t-if="company.logo or company.report_header" class="row zero_min_height">
-                        <div class="col-12">
-                            <div style="border-bottom: 1px solid black;"/>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6" name="company_address">
-                            <ul class="list-unstyled">
-                                <li t-if="company.is_company_details_empty"><t t-esc="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/></li>
-                                <li t-else=""><t t-esc="company.company_details"/></li>
-                                <li t-if="forced_vat">
-                                    <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
-                                    <span t-esc="forced_vat"/>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </t>
+            </div>
         </xpath>
     </template>
 </odoo>
