@@ -19,8 +19,8 @@ msgstr ""
 
 #. module: custom_invoice_header
 #: model_terms:ir.ui.view,arch_db:custom_invoice_header.invoice_number_label
-msgid "<span>Invoice Number:</span>"
-msgstr "<span>Fakturanummer:</span>"
+msgid "<span>Invoice</span>"
+msgstr "<span>Faktura</span>"
 
 #. module: custom_invoice_header
 #: model_terms:ir.ui.view,arch_db:custom_invoice_header.external_layout_standard_custom
