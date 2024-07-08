@@ -2,7 +2,7 @@
 <odoo>
     <!-- Keep your existing invoice_number_label template -->
     <template id="invoice_number_label">
-        <span>Invoice Number:</span>
+        <span>Invoice</span>
     </template>
 
     <!-- Keep your existing minimal_layout_custom template with the JavaScript -->
