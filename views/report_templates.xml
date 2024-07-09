@@ -89,7 +89,7 @@
         </xpath>
     </template>
 
-     <!-- Extend for Light (Standard), Boxed, Bold, and Striped templates -->
+    <!-- Extend for Light (Standard), Boxed, Bold, and Striped templates -->
     <!-- Light (Standard) -->
     <template id="external_layout_light_custom" inherit_id="web.external_layout_standard">
         <xpath expr="//div[contains(@t-attf-class, 'header')]" position="replace">
@@ -118,7 +118,7 @@
                     </div>
                     <div class="col-6 text-end">
                         <!-- Add this new div for the invoice number -->
-                        <div t-if="o and o._name == 'account.move' and o.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')" 
+                        <div t-if="report_type == 'pdf' and o and o._name == 'account.move' and o.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')" 
                              class="invoice-number-container not-first-page">
                             <strong>
                                 <t t-call="custom_invoice_header.invoice_number_label"/>
@@ -135,7 +135,7 @@
     <template id="external_layout_boxed_custom" inherit_id="web.external_layout_boxed">
         <xpath expr="//div[contains(@class, 'o_boxed_header')]" position="inside">
             <!-- Add this new div for the invoice number in the center-right of the header, only on pages after the first -->
-            <div t-if="o and o._name == 'account.move' and o.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')" 
+            <div t-if="report_type == 'pdf' and o and o._name == 'account.move' and o.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')" 
                 class="text-end mt0 h4 not-first-page" style="position: absolute; top: 50%; right: 0; transform: translateY(-50%);">
                 <strong>
                     <t t-call="custom_invoice_header.invoice_number_label"/>
@@ -149,7 +149,7 @@
     <template id="external_layout_bold_custom" inherit_id="web.external_layout_bold">
         <xpath expr="//div[contains(@class, 'o_clean_header')]" position="inside">
             <!-- Add this new div for the invoice number in the center-right of the header, only on pages after the first -->
-            <div t-if="o and o._name == 'account.move' and o.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')" 
+            <div t-if="report_type == 'pdf' and o and o._name == 'account.move' and o.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')" 
                 class="text-end mt0 h5 not-first-page" style="position: absolute; top: 50%; right: 0; transform: translateY(-50%);">
                 <strong>
                     <t t-call="custom_invoice_header.invoice_number_label"/>
@@ -163,7 +163,7 @@
     <template id="external_layout_striped_custom" inherit_id="web.external_layout_striped">
         <xpath expr="//div[contains(@class, 'o_background_header')]" position="inside">
             <!-- Add this new div for the invoice number in the center-right of the header, only on pages after the first -->
-            <div t-if="o and o._name == 'account.move' and o.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')" 
+            <div t-if="report_type == 'pdf' and o and o._name == 'account.move' and o.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')" 
                 class="text-end mt0 h3 not-first-page" style="position: absolute; top: 50%; right: 0; transform: translateY(-50%);">
                 <strong>
                     <t t-call="custom_invoice_header.invoice_number_label"/>
@@ -172,4 +172,5 @@
             </div>
         </xpath>
     </template>
+</odoo>
 </odoo>
