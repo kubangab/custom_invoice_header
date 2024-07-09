@@ -165,10 +165,8 @@
             <!-- Add this new div for the invoice number in the center-right of the header, only on pages after the first -->
             <div t-if="report_type == 'pdf' and o and o._name == 'account.move' and o.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')" 
                 class="text-end mt0 h3 not-first-page" style="position: absolute; top: 50%; right: 0; transform: translateY(-50%);">
-                <strong>
-                    <t t-call="custom_invoice_header.invoice_number_label"/>
-                    <span t-field="o.name"/>
-                </strong>
+                <t t-call="custom_invoice_header.invoice_number_label"/>
+                <span t-field="o.name"/>
             </div>
         </xpath>
     </template>
